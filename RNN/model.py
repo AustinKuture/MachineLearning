@@ -7,7 +7,7 @@ import tensorflow as tf
 from tensorflow.python.ops import ctc_ops
 
 import utils
-from config import Config
+from RNN.config import Config
 
 b_stddev = 0.046875
 h_stddev = 0.046875
@@ -21,7 +21,7 @@ n_hidden_3 = 2 * 512
 
 learning_rate = 0.001
 keep_dropout_rate = 0.95
-keep_dropout_rate = 0.95
+# keep_dropout_rate = 0.95
 relu_clip = 20
 
 n_input = 26  # 计算美尔倒谱系数的个数
@@ -344,6 +344,7 @@ class BiRNN(object):
         self.test_target_wav_file(wav_files, txt_labels)
 
     def variable_on_device(self, name, shape, initializer):
-        with tf.device('/gpu:0'):
+        # with tf.device('/gpu:0'):
+        with tf.device('/cpu:0'):
             var = tf.get_variable(name=name, shape=shape, initializer=initializer)
         return var
