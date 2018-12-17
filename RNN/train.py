@@ -16,3 +16,5 @@ words_size, words, word_num_map = utils.create_dict(text_labels)
 
 bi_rnn = BiRNN(wav_files, text_labels, words_size, words, word_num_map)
 bi_rnn.build_train()
+
+

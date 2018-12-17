@@ -11,6 +11,8 @@ from RNN.config import Config
 
 def get_wavs_lables():
     conf = Config()
+    print('FILE_DATA_PATH:', conf.get("FILE_DATA").wav_path)
+    print('FILE_DATA_LABEL:', conf.get("FILE_DATA").label_file)
     wav_files, text_labels = do_get_wavs_lables(conf.get("FILE_DATA").wav_path,
                                                 conf.get("FILE_DATA").label_file)
     print(wav_files[0], text_labels[0])
@@ -43,6 +45,8 @@ def do_get_wavs_lables(wav_path, label_file):
             label = label.strip(b'\n')
             label_id = label.split(b' ', 1)[0]
             label_text = label.split(b' ', 1)[1]
+            print('LABEL_ID:', label_id.decode())
+            print('LABEL_TEXT:', label_text.decode())
             labels_dict[label_id.decode('ascii')] = label_text.decode('utf-8')
 
     labels = []
