@@ -2,8 +2,8 @@
 
 import os
 import utils
-from RNN.config import Config
-from RNN.model import BiRNN
+from config import Config
+from model import BiRNN
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 

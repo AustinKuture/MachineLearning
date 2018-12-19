@@ -7,7 +7,7 @@ import tensorflow as tf
 from tensorflow.python.ops import ctc_ops
 
 import utils
-from RNN.config import Config
+from config import Config
 
 b_stddev = 0.046875
 h_stddev = 0.046875
@@ -97,11 +97,13 @@ class BiRNN(object):
         # 双向rnn
         with tf.name_scope('birnn'):
             # 前向
-            lstm_fw_cell = tf.contrib.rnn.BasicLSTMCell(n_cell_dim, forget_bias=1.0, state_is_tuple=True)
+            # lstm_fw_cell = tf.contrib.rnn.BasicLSTMCell(n_cell_dim, forget_bias=1.0, state_is_tuple=True)
+            lstm_fw_cell = tf.nn.rnn_cell.LSTMCell(n_cell_dim, forget_bias=1.0, state_is_tuple=True, name='basic_lstm_cell')  # 替换旧方法
             lstm_fw_cell = tf.contrib.rnn.DropoutWrapper(lstm_fw_cell,
                                                          input_keep_prob=keep_dropout)
             # 后向
-            lstm_bw_cell = tf.contrib.rnn.BasicLSTMCell(n_cell_dim, forget_bias=1.0, state_is_tuple=True)
+            # lstm_bw_cell = tf.contrib.rnn.BasicLSTMCell(n_cell_dim, forget_bias=1.0, state_is_tuple=True)
+            lstm_bw_cell = tf.nn.rnn_cell.LSTMCell(n_cell_dim, forget_bias=1.0, state_is_tuple=True, name='basic_lstm_cell')
             lstm_bw_cell = tf.contrib.rnn.DropoutWrapper(lstm_bw_cell,
                                                          input_keep_prob=keep_dropout)
 
